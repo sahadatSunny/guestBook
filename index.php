@@ -1,7 +1,5 @@
 <?php 
 
-
-
 include_once ($_SERVER['DOCUMENT_ROOT'].'/guestBook/config.php');
 require_once ($_SERVER['DOCUMENT_ROOT'].'/guestBook/processor.php');
 
@@ -40,15 +38,17 @@ if(isset($_GET['position'])){  //to check edit button has been pressed or not an
 
 $userData = [];
 
-if(!array_key_exists('guestData',$_COOKIE)){
-    $_SESSION['message'] = "List is empty now please add a guest from below"; // msg if there cooke has not been sat yet
-    $_SESSION['msg-type'] = "info";
-}
 
 if(array_key_exists('guestData', $_COOKIE)){
         $userData = unserialize($_COOKIE['guestData']);
 
 }
+
+if(empty($userData)){
+    $_SESSION['message'] = "List is empty now please add a guest from below"; // msg if there cooke has not been sat yet
+    $_SESSION['msg-type'] = "info";
+}
+
 
 
 
@@ -74,8 +74,10 @@ if(array_key_exists('guestData', $_COOKIE)){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
        
         <style>
           
@@ -201,6 +203,14 @@ if(array_key_exists('guestData', $_COOKIE)){
                             </div>
 
                         </form>
+
+                        <?php 
+
+                            if(!empty($userData)){
+                                ?> <a class="btn btn-primary" href="pdfReview.php">Download PDF</a>
+                            
+                        
+                       <?php } ?>
 
                     </div>
                 </div>

@@ -35,7 +35,7 @@ class Validator{
                 }
 
                 if(strlen($userReturn['name'])>30){
-                        $_SESSION['nameError'] = "Name can't be longer then 30 alpha";
+                        $_SESSION['nameError'] = "Name can't be longer then 30 characters";
                         $_SESSION['errorMsgType'] = "warning";
                         return false;
                 }else{
